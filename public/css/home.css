@@ -1,0 +1,32 @@
+.about{
+    width: 23%;
+    /* height: 100%; */
+    margin-top: 10px;
+    background-color: #e2e2e2;
+    text-align: center;
+    padding: 20px 0;
+    border-right: 2px solid #ccc;
+}
+
+.user_image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid red;
+}
+
+.user_infos{
+    margin-bottom: 10px;
+}
+
+.user_description{
+    text-align: left;
+    padding: 0 30px;
+}
+
+.posts_container{
+    width: calc(100% - 23%);
+    background-color: #fff;
+    margin-top: 10px;
+    padding: 10px;
+}
