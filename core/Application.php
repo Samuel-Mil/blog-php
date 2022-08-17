@@ -24,20 +24,34 @@ class Application
     {
         $path = "App\Src\Controllers\\";
         $url = APP_URL;
-
-        if($url[1] === ''){
+        
+        if(!@$url[1]){
             $path .= "Home";
         }else{
-            $path .= ucfirst(strtolower($url[0]));
+            $path .= ucfirst(strtolower($url[1]));
+        }
+
+        // echo '<pre>';
+        // var_dump($url[0]);
+        // echo '</pre>';
+
+        if($url[1] === 'dashboard'){
+            $path = "App\Dashboard\Controllers\\";
+
+            if(!@$url[2]){
+                $path .= 'Home';
+            }else{
+                $path .= ucfirst(strtolower($url[2]));
+            }
         }
 
         $path .= "Controller";
 
-        if(class_exists($path)){
-            $this->controller = new $path();
-            return call_user_func([$this->controller, 'index']);
-        }else{
+        if(!class_exists($path)){
             die("<h1>404</h1>");
         }
+
+        $this->controller = new $path();
+        return call_user_func([$this->controller, 'index']);
     }
 }
