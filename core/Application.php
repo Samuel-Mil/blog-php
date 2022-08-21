@@ -9,13 +9,15 @@ class Application
     public ?Controller $controller = null;
     public View $view;
     public Database $db;
+    public Response $response;
 
     public function __construct()
     {
         self::$app = $this;
         $this->db = new Database();
         $this->view = new View();
-        
+        $this->response = new Response();
+
         define('ROOT_DIR', dirname(__DIR__));
         define("APP_URL", explode('/', $_SERVER['REQUEST_URI']));
     }
@@ -24,9 +26,9 @@ class Application
     {
         $path = "App\Src\Controllers\\";
         $url = APP_URL;
-        
+
         if(!@$url[1]){
-            $path .= "Home";
+            $this->response->redirect("home");
         }else{
             $path .= ucfirst(strtolower($url[1]));
         }
@@ -36,10 +38,10 @@ class Application
         // echo '</pre>';
 
         if($url[1] === 'dashboard'){
-            $path = "App\Dashboard\Controllers\\";
+            $path = "App\Src\Controllers\Dashboard\\";
 
             if(!@$url[2]){
-                $path .= 'Home';
+                $this->response->redirect("dashboard/home");
             }else{
                 $path .= ucfirst(strtolower($url[2]));
             }
