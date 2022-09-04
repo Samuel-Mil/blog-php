@@ -22,36 +22,26 @@
 
         <main>
             <ul>
+                <li class="page_category_title">Dashboard</li>
+
+                <li class="page_title">
+                    <a href="/dashboard">Home</a>
+                </li>
+
                 <li class="page_category_title">Users</li>
 
                 <li class="page_title">
-                    <a href="#">List users</a>
+                    <a href="/dashboard/listUsers">List users</a>
                 </li>
 
                 <li class="page_title">
-                    <a href="#">Create user</a>
+                    <a href="/dashboard/createUser">Create user</a>
                 </li>
 
                 <li class="page_category_title">Posts</li>
 
                 <li class="page_title">
-                    <a href="#">List posts</a>
-                </li>
-
-                <li class="page_title">
-                    <a href="#">Create post</a>
-                </li><li class="page_category_title">Posts</li>
-
-                <li class="page_title">
-                    <a href="#">List posts</a>
-                </li>
-
-                <li class="page_title">
-                    <a href="#">Create post</a>
-                </li><li class="page_category_title">Posts</li>
-
-                <li class="page_title">
-                    <a href="#">List posts</a>
+                    <a href="/dashboard/listPosts">List posts</a>
                 </li>
 
                 <li class="page_title">

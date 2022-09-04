@@ -33,10 +33,6 @@ class Application
             $path .= ucfirst(strtolower($url[1]));
         }
 
-        // echo '<pre>';
-        // var_dump($url[0]);
-        // echo '</pre>';
-
         if($url[1] === 'dashboard'){
             $path = "App\Src\Controllers\Dashboard\\";
 
@@ -50,6 +46,9 @@ class Application
         $path .= "Controller";
 
         if(!class_exists($path)){
+            echo '<pre>';
+            var_dump($path);
+            echo 'This path does not exists!</pre>';
             die("<h1>404</h1>");
         }
 
