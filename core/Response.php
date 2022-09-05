@@ -8,4 +8,9 @@ class Response
     {
         header("Location: $url");
     }
+
+    public function setResponseCode(int $code)
+    {
+        return http_response_code($code);
+    }
 }

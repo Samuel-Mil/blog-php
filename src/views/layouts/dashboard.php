@@ -31,17 +31,17 @@
                 <li class="page_category_title">Users</li>
 
                 <li class="page_title">
-                    <a href="/dashboard/listUsers">List users</a>
+                    <a href="/dashboard/list_users">List users</a>
                 </li>
 
                 <li class="page_title">
-                    <a href="/dashboard/createUser">Create user</a>
+                    <a href="/dashboard/create_user">Create user</a>
                 </li>
 
                 <li class="page_category_title">Posts</li>
 
                 <li class="page_title">
-                    <a href="/dashboard/listPosts">List posts</a>
+                    <a href="/dashboard/list_posts">List posts</a>
                 </li>
 
                 <li class="page_title">

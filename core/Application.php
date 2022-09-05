@@ -9,14 +9,18 @@ class Application
     public ?Controller $controller = null;
     public View $view;
     public Database $db;
+    public Request $request;
     public Response $response;
+    public Router $router;
 
     public function __construct()
     {
         self::$app = $this;
         $this->db = new Database();
         $this->view = new View();
+        $this->request = new Request();
         $this->response = new Response();
+        $this->router = new Router($this->request, $this->response);
 
         define('ROOT_DIR', dirname(__DIR__));
         define("APP_URL", explode('/', $_SERVER['REQUEST_URI']));
@@ -24,35 +28,12 @@ class Application
 
     public function run()
     {
-        $path = "App\Src\Controllers\\";
-        $url = APP_URL;
-
-        if(!@$url[1]){
-            $this->response->redirect("home");
-        }else{
-            $path .= ucfirst(strtolower($url[1]));
-        }
-
-        if($url[1] === 'dashboard'){
-            $path = "App\Src\Controllers\Dashboard\\";
-
-            if(!@$url[2]){
-                $this->response->redirect("dashboard/home");
-            }else{
-                $path .= ucfirst(strtolower($url[2]));
-            }
-        }
-
-        $path .= "Controller";
-
-        if(!class_exists($path)){
+        try{
+            $this->router->resolve();
+        }catch(\Exception $e){
             echo '<pre>';
-            var_dump($path);
-            echo 'This path does not exists!</pre>';
-            die("<h1>404</h1>");
+            die('Error: '. $e->getMessage());
+            echo '</pre>';
         }
-
-        $this->controller = new $path();
-        return call_user_func([$this->controller, 'index']);
     }
 }

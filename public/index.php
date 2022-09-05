@@ -7,4 +7,6 @@ $dotenv->load();
 
 $app = new App\Core\Application();
 
+include_once __DIR__."/../routes/web.php";
+
 $app->run();
