@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <title>Blog | <?= $this->subTitle ?></title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="<?=$_ENV['APP_URL']?>/css/style.css">
     <link rel="stylesheet" href="<?= $this->getStyleSheet() ?>">
     <script defer src="https://kit.fontawesome.com/3fb918250b.js" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

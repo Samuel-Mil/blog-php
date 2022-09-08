@@ -11,7 +11,7 @@ class View
     {
         $viewContent = $this->renderOnlyView($view, $params);
         $layoutContent = $this->layoutContent();
-        
+
         echo str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
@@ -39,7 +39,7 @@ class View
 
     public function getStyleSheet()
     {
-        return './css/'.$this->styleSheet.'.css';
+        return $_ENV['APP_URL'].'css/'.$this->styleSheet.'.css';
     }
 
     public function setStyleSheet(string $styleSheet)

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="<?=$_ENV['APP_URL']?>/css/style.css">
+    <link rel="stylesheet" href="<?=$_ENV['APP_URL']?>/css/dashboard.css">
     <link rel="stylesheet" href="<?= $this->getStyleSheet() ?>">
     <script defer src="https://kit.fontawesome.com/3fb918250b.js" crossorigin="anonymous"></script>
     <title>Dashboard | blog</title>

@@ -9,6 +9,9 @@ $routes = App\Core\Application::$app->router;
 
 // Site
 $routes->get('/', [HomeController::class, 'index']);
+$routes->get('/home', [HomeController::class, 'index']);
+$routes->get('/home/{id}', [HomeController::class, 'index']);
+$routes->get('/home/{id:\d+}/{username}', [HomeController::class, 'index']);
 
 // Dashboard
 $routes->get('/dashboard/home', [DashHomeController::class, 'index']);

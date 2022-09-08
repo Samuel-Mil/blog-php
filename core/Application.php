@@ -21,9 +21,6 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
-
-        define('ROOT_DIR', dirname(__DIR__));
-        define("APP_URL", explode('/', $_SERVER['REQUEST_URI']));
     }
 
     public function run()

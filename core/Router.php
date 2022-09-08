@@ -6,9 +6,9 @@ use App\Core\Exceptions\NotFoundException;
 
 class Router
 {
-    public array $router = [];
     public Response $response;
     public Request $request;
+    private array $routeMap = [];
 
     public function __construct(Request $request, Response $response)
     {
@@ -18,22 +18,71 @@ class Router
 
     public function get(string $path, $callback)
     {
-        $this->router['get'][$path] = $callback;
+        $this->routeMap['get'][$path] = $callback;
     }
 
     public function post(string $path, $callback)
     {
-        $this->router['post'][$path] = $callback;
+        $this->routeMap['post'][$path] = $callback;
+    }
+
+    public function getRouteMap($method): array
+    {
+        return $this->routeMap[$method] ?? [];
+    }
+
+    public function getCallback()
+    {
+        $method = $this->request->method();
+        $url = $this->request->getPath();
+
+        $url = trim($url, "/");
+
+        $routes = $this->getRouteMap($method);
+
+        $routeParams = false;
+
+        foreach($routes as $route => $callback){
+            $route = trim($route, "/");
+            $routeNames = [];
+
+            if(!$route)
+                continue;
+
+            if(preg_match_all("/\{(\w+)(:[^}]+)?}/", $route, $matches)){
+                $routeNames = $matches[1];
+            }
+
+            $routeMapegex = "@^". preg_replace_callback("/\{\w+(:([^}]+))?}/",
+            fn($m) => isset($m[2]) ? "({$m[2]})" : '(\w+)',
+            $route) ."$@";
+
+            if(preg_match_all($routeMapegex, $url, $valueMatches)){
+                $values = [];
+                for($i = 1; $i < count($valueMatches); $i++){
+                    $values[] = $valueMatches[$i][0];
+                }
+                $routeParams = array_combine($routeNames, $values);
+
+                $this->request->setRouterParams($routeParams);
+
+                return $callback;
+            }
+        }
+
+        return false;
     }
 
     public function resolve()
     {
         $path = $this->request->getPath();
         $method = $this->request->method();
-        $callback = $this->router[$method][$path] ?? false;
+        $callback = $this->routeMap[$method][$path] ?? false;
 
-        if($callback === false){
-            throw new NotFoundException();
+        if(!$callback){
+            $callback = $this->getCallback();
+            if($callback === false)
+                throw new NotFoundException();
         }
 
         if(is_string($callback)){
