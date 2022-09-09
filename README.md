@@ -16,8 +16,8 @@ Create __.env__ file in main directory based in __.env.example__ in the same dir
 
 ## TODO
 
-- [ ] Create a better router sistem
-- [ ] Switch from img to background-image on post list in dashboard
+- [x] Create a better router sistem
+- [x] Switch from img to background-image on post list in dashboard
 - [ ] Create single post page
 - [ ] Create post page on dashboard
 
